@@ -54,8 +54,6 @@
     }
 
 	var loginData = parseQueryString(document.location.search);
-	history.replaceState({}, "", document.location.pathname);
-
 	if (loginData.status === "ok" && loginData["access_token"]) {
 		fetchReserves(loginData);
 	}
