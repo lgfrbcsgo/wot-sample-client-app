@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <body>
+<h3>Clan Reserves</h3>
 <button onclick="login()">Login</button>
-<pre id="login-info"></pre>
+<hr>
+<pre id="reserves-info"></pre>
 <script>
 	var APPLICATION_ID = "049d600ad1f99c8194beb7ee4d05eed9";
 	var BASE = "https://api.worldoftanks.eu";
@@ -47,7 +49,7 @@
         var req = new XMLHttpRequest();
         req.addEventListener("load", function () {
             var prettyJSON = JSON.stringify(JSON.parse(this.responseText), null, 2);
-            document.getElementById("login-info").innerText = prettyJSON;
+            document.getElementById("reserves-info").innerText = prettyJSON;
         });
         req.open("GET", requestUrl);
         req.send();
