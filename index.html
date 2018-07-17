@@ -6,44 +6,44 @@
 <hr>
 <pre id="reserves-info"></pre>
 <script>
-	var APPLICATION_ID = "049d600ad1f99c8194beb7ee4d05eed9";
-	var BASE = "https://api.worldoftanks.eu";
-	var LOGIN = BASE + "/wot/auth/login/";
-	var RESERVES = BASE + "/wot/stronghold/clanreserves/";
+    var APPLICATION_ID = "049d600ad1f99c8194beb7ee4d05eed9";
+    var BASE = "https://api.worldoftanks.eu";
+    var LOGIN = BASE + "/wot/auth/login/";
+    var RESERVES = BASE + "/wot/stronghold/clanreserves/";
 
-	function parseQueryString(queryString) {
-		var queryParams = {};
-		queryString.slice(1).split('&').filter(function (keyValString) {
-			return keyValString !== "";
-		}).forEach(function (keyValString) {
-			var keyVal = keyValString.split("=");
-			var key = keyVal[0];
-			var val = keyVal[1];
-			queryParams[key] = decodeURIComponent(val);
-		});
-		return queryParams;
-	}
+    function parseQueryString(queryString) {
+        var queryParams = {};
+        queryString.slice(1).split('&').filter(function (keyValString) {
+            return keyValString !== "";
+        }).forEach(function (keyValString) {
+            var keyVal = keyValString.split("=");
+            var key = keyVal[0];
+            var val = keyVal[1];
+            queryParams[key] = decodeURIComponent(val);
+        });
+        return queryParams;
+    }
 
-	function makeQueryString(queryParams) {
-		return Object.keys(queryParams).map(function(key) {
-			return key + "=" + encodeURIComponent(queryParams[key]);
-		}).join("&");
-	}
+    function makeQueryString(queryParams) {
+        return Object.keys(queryParams).map(function (key) {
+            return key + "=" + encodeURIComponent(queryParams[key]);
+        }).join("&");
+    }
 
-	function makeRequestUrl(base, queryParams) {
-		return base + "?" + makeQueryString(queryParams);
-	}
+    function makeRequestUrl(base, queryParams) {
+        return base + "?" + makeQueryString(queryParams);
+    }
 
-	function login() {
-		document.location.href = makeRequestUrl(LOGIN, {
-			"application_id": APPLICATION_ID,
-			"redirect_uri": document.location.origin + document.location.pathname
-		});
-	}
+    function login() {
+        document.location.href = makeRequestUrl(LOGIN, {
+            "application_id": APPLICATION_ID,
+            "redirect_uri": document.location.origin + document.location.pathname
+        });
+    }
 
-	function fetchReserves(loginData) {
-	    var requestUrl = makeRequestUrl(RESERVES, {
-	        "application_id": APPLICATION_ID,
+    function fetchReserves(loginData) {
+        var requestUrl = makeRequestUrl(RESERVES, {
+            "application_id": APPLICATION_ID,
             "access_token": loginData["access_token"]
         });
         var req = new XMLHttpRequest();
@@ -55,10 +55,10 @@
         req.send();
     }
 
-	var loginData = parseQueryString(document.location.search);
-	if (loginData.status === "ok" && loginData["access_token"]) {
-		fetchReserves(loginData);
-	}
+    var loginData = parseQueryString(document.location.search);
+    if (loginData.status === "ok" && loginData["access_token"]) {
+        fetchReserves(loginData);
+    }
 </script>
 </body>
 </html>
