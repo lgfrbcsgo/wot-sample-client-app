@@ -20,7 +20,7 @@
         function login() {
             const redirectUrl = new URL(LOGIN)
             redirectUrl.searchParams.set("application_id", APPLICATION_ID)
-            redirectUrl.searchParams.set("redirect_uri", window.location.href)
+            redirectUrl.searchParams.set("redirect_uri", new URL(".", window.location.href).href)
 
             window.location.assign(redirectUrl)
         }
